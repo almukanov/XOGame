@@ -90,7 +90,7 @@ public class Main {
             // horisontal
            if (GameField[i][j]==inboxChar){
                res++;
-           } if(res==3)return true;
+           } if(res==MaxHeight)return true;
        }
         }return false;
     }
