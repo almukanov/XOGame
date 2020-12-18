@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -81,6 +82,33 @@ public class Main {
         }return true;
     }
 
+   public static boolean isWin(char inboxChar) {
+       int res = 0;
+        for (int i = 0; i < MaxWidth; i++) {
+            for (int j = 0; j < MaxHeight; j++) {
+
+            // horisontal
+           if (GameField[i][j]==inboxChar){
+               res++;
+           } if(res==3)return true;
+       }
+        }return false;
+    }
+
+/*          if (GameField[0][0] == inboxChar && GameField[0][1] == inboxChar && GameField[0][2] == inboxChar) return true;
+            if (GameField[1][0] == inboxChar && GameField[1][1] == inboxChar && GameField[1][2] == inboxChar) return true;
+            if (GameField[2][0] == inboxChar && GameField[2][1] == inboxChar && GameField[2][2] == inboxChar) return true;
+
+            if (GameField[0][0] == inboxChar && GameField[1][0] == inboxChar && GameField[2][0] == inboxChar) return true;
+            if (GameField[0][1] == inboxChar && GameField[1][1] == inboxChar && GameField[2][1] == inboxChar) return true;
+            if (GameField[0][2] == inboxChar && GameField[1][2] == inboxChar && GameField[2][2] == inboxChar) return true;
+
+            if (GameField[0][0] == inboxChar && GameField[1][1] == inboxChar && GameField[2][2] == inboxChar) return true;
+            if (GameField[0][2] == inboxChar && GameField[1][1] == inboxChar && GameField[2][0] == inboxChar) return true;*/
+
+
+
+
 public static void  main(String[] args){
     initGameField();
     DrawField();
@@ -90,9 +118,17 @@ public static void  main(String[] args){
        if (IsFull()){
            break;
        }
+       if (isWin(HUMAN)){
+           System.out.println("You are winner!");
+           break;
+       }
        PCTurn();
        DrawField();
        if (IsFull()){
+           break;
+       }
+       if (isWin(PC)){
+           System.out.println("PC is winner");
            break;
        }
    }
