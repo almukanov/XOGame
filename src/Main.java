@@ -106,7 +106,7 @@ public class Main {
 
     }
 
-    public static boolean isVertical(char inboxChar) {
+    public static boolean isHorisontal(char inboxChar) {
         int res = 0;
         int[] Array = new int[MaxWidth];
         for (int i = 0; i < MaxWidth; i++) {
@@ -159,7 +159,7 @@ public class Main {
     if (isDiagonal2(inboxChar)){
         return true;
     } else
-        if (isVertical(inboxChar)){
+        if (isHorisontal(inboxChar)){
     return true;
         } else
        /* if (isHorisontal(inboxChar)){
