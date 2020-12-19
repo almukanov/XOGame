@@ -82,17 +82,91 @@ public class Main {
         }return true;
     }
 
-   public static boolean isWin(char inboxChar) {
-       int res = 0;
+    public static boolean isDiagonal1(char inboxChar){
+        int res = 0;
+        for (int i = 0, j = 0; i < MaxWidth; i++, j++) {
+            if (GameField[i][j]==inboxChar){
+                res++;
+            }
+
+            if(res==MaxHeight)return true;
+        }return false;
+
+    }
+
+    public static boolean isDiagonal2(char inboxChar){
+        int res = 0;
+        for (int i = 0, j = MaxHeight-1; i < MaxWidth; i++, j--) {
+            if (GameField[i][j]==inboxChar){
+                res++;
+            }
+
+            if(res==MaxHeight)return true;
+        }return false;
+
+    }
+
+    public static boolean isVertical(char inboxChar) {
+        int res = 0;
+        int[] Array = new int[MaxWidth];
         for (int i = 0; i < MaxWidth; i++) {
             for (int j = 0; j < MaxHeight; j++) {
 
-            // horisontal
-           if (GameField[i][j]==inboxChar){
-               res++;
-           } if(res==MaxHeight)return true;
-       }
+
+                if (GameField[i][j] == inboxChar) {
+                   Array[i] = res;
+                   res++;
+                }
+
+                if (Array[i] == MaxHeight-1) {
+                    return true;
+
+                }
+            }
         }return false;
+
+        }
+
+
+
+
+
+
+   /* public static boolean isHorisontal(char inboxChar) {
+        int res = 0;
+        for (int i = 0; i < MaxWidth; i++) {
+            for (int j = 0; j < MaxHeight; j++) {
+                if (GameField[i][j] == inboxChar) {
+                    res++;
+                    int array[i] = res;
+                    if (array[i] == MaxHeight) {
+                        return true;
+                    }
+                }
+
+            }
+
+        }
+
+        return false;
+
+    }*/
+
+        public static boolean isWin(char inboxChar) {
+     if ( isDiagonal1(inboxChar)){
+         return true;
+     } else
+    if (isDiagonal2(inboxChar)){
+        return true;
+    } else
+        if (isVertical(inboxChar)){
+    return true;
+        } else
+       /* if (isHorisontal(inboxChar)){
+            return true;}
+*/
+
+        return false;
     }
 
 /*          if (GameField[0][0] == inboxChar && GameField[0][1] == inboxChar && GameField[0][2] == inboxChar) return true;
