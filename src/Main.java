@@ -9,6 +9,7 @@ public class Main {
     public static final char HUMAN = 'X';
     public static final char PC = 'O';
     public static final char EMPTY_CELL = '_';
+    public static final int NumberForWin = 4;
 
     public static final Scanner SCANNER = new Scanner(System.in);
     public static final Random RANDOM = new Random();
@@ -19,8 +20,8 @@ public class Main {
     public static int MaxHeight;
 
     public static void initGameField(){
-        MaxHeight = 3;
-        MaxWidth = 3;
+        MaxHeight = 5;
+        MaxWidth = 5;
         GameField = new char[MaxWidth][MaxHeight];
         for (int i = 0; i < MaxWidth; i++) {
             for (int j = 0; j < MaxHeight; j++) {
@@ -82,29 +83,96 @@ public class Main {
         }return true;
     }
 
-   public static boolean isWin(char inboxChar) {
-       int res = 0;
-        for (int i = 0; i < MaxWidth; i++) {
-            for (int j = 0; j < MaxHeight; j++) {
+    public static boolean isDiagonal1(char inboxChar){
+        int res = 0;
+        for (int i = 0, j = 0; i < MaxWidth; i++, j++) {
+            if (GameField[i][j]==inboxChar){
+                res++;
+            }
 
-            // horisontal
-           if (GameField[i][j]==inboxChar){
-               res++;
-           } if(res==3)return true;
-       }
+            if(res==NumberForWin)return true;
         }return false;
+
     }
 
-/*          if (GameField[0][0] == inboxChar && GameField[0][1] == inboxChar && GameField[0][2] == inboxChar) return true;
-            if (GameField[1][0] == inboxChar && GameField[1][1] == inboxChar && GameField[1][2] == inboxChar) return true;
-            if (GameField[2][0] == inboxChar && GameField[2][1] == inboxChar && GameField[2][2] == inboxChar) return true;
+    public static boolean isDiagonal2(char inboxChar){
+        int res = 0;
+        for (int i = 0, j = MaxHeight-1; i < MaxWidth; i++, j--) {
+            if (GameField[i][j]==inboxChar){
+                res++;
+            }
 
-            if (GameField[0][0] == inboxChar && GameField[1][0] == inboxChar && GameField[2][0] == inboxChar) return true;
-            if (GameField[0][1] == inboxChar && GameField[1][1] == inboxChar && GameField[2][1] == inboxChar) return true;
-            if (GameField[0][2] == inboxChar && GameField[1][2] == inboxChar && GameField[2][2] == inboxChar) return true;
+            if(res==NumberForWin)return true;
+        }return false;
 
-            if (GameField[0][0] == inboxChar && GameField[1][1] == inboxChar && GameField[2][2] == inboxChar) return true;
-            if (GameField[0][2] == inboxChar && GameField[1][1] == inboxChar && GameField[2][0] == inboxChar) return true;*/
+    }
+
+    public static boolean isHorisontal(char inboxChar) {
+
+        int[][] Array = new int[MaxWidth][MaxHeight];
+        for (int i = 0; i < MaxWidth; i++) {
+            int res = 1;
+            for (int j = 0; j < MaxHeight; j++) {
+
+
+                if (GameField[j][i] == inboxChar) {
+                   Array[j][i] = res;
+                   res++;
+
+                    if (Array[j][i] == NumberForWin) {
+                        return true;
+                }
+
+                }
+
+
+            }
+        }return false;
+
+        }
+
+    public static boolean isVertical(char inboxChar) {
+
+        int[][] Array = new int[MaxWidth][MaxHeight];
+        for (int i = 0; i < MaxWidth; i++) {
+            int res = 1;
+            for (int j = 0; j < MaxHeight; j++) {
+
+
+                if (GameField[i][j] == inboxChar) {
+                    Array[i][j] = res;
+                    res++;
+
+                    if (Array[i][j] == NumberForWin) {
+                        return true;
+                    }
+
+                }
+
+
+            }
+        }return false;
+
+    }
+
+
+        public static boolean isWin(char inboxChar) {
+     if ( isDiagonal1(inboxChar)){
+         return true;
+     } else
+    if (isDiagonal2(inboxChar)){
+        return true;
+    } else
+        if (isHorisontal(inboxChar)){
+    return true;
+        } else
+       if (isVertical(inboxChar)){
+            return true;}
+
+
+        return false;
+    }
+
 
 
 
