@@ -9,6 +9,7 @@ public class Main {
     public static final char HUMAN = 'X';
     public static final char PC = 'O';
     public static final char EMPTY_CELL = '_';
+    public static final int NumberForWin = 4;
 
     public static final Scanner SCANNER = new Scanner(System.in);
     public static final Random RANDOM = new Random();
@@ -19,8 +20,8 @@ public class Main {
     public static int MaxHeight;
 
     public static void initGameField(){
-        MaxHeight = 3;
-        MaxWidth = 3;
+        MaxHeight = 5;
+        MaxWidth = 5;
         GameField = new char[MaxWidth][MaxHeight];
         for (int i = 0; i < MaxWidth; i++) {
             for (int j = 0; j < MaxHeight; j++) {
@@ -89,7 +90,7 @@ public class Main {
                 res++;
             }
 
-            if(res==MaxHeight)return true;
+            if(res==NumberForWin)return true;
         }return false;
 
     }
@@ -101,56 +102,59 @@ public class Main {
                 res++;
             }
 
-            if(res==MaxHeight)return true;
+            if(res==NumberForWin)return true;
         }return false;
 
     }
 
     public static boolean isHorisontal(char inboxChar) {
-        int res = 0;
-        int[] Array = new int[MaxWidth];
+
+        int[][] Array = new int[MaxWidth][MaxHeight];
         for (int i = 0; i < MaxWidth; i++) {
+            int res = 1;
             for (int j = 0; j < MaxHeight; j++) {
 
 
-                if (GameField[i][j] == inboxChar) {
-                   Array[i] = res;
+                if (GameField[j][i] == inboxChar) {
+                   Array[j][i] = res;
                    res++;
+
+                    if (Array[j][i] == NumberForWin) {
+                        return true;
                 }
 
-                if (Array[i] == MaxHeight-1) {
-                    return true;
-
                 }
+
+
             }
         }return false;
 
         }
 
+    public static boolean isVertical(char inboxChar) {
 
-
-
-
-
-   /* public static boolean isHorisontal(char inboxChar) {
-        int res = 0;
+        int[][] Array = new int[MaxWidth][MaxHeight];
         for (int i = 0; i < MaxWidth; i++) {
+            int res = 1;
             for (int j = 0; j < MaxHeight; j++) {
+
+
                 if (GameField[i][j] == inboxChar) {
+                    Array[i][j] = res;
                     res++;
-                    int array[i] = res;
-                    if (array[i] == MaxHeight) {
+
+                    if (Array[i][j] == NumberForWin) {
                         return true;
                     }
+
                 }
 
+
             }
+        }return false;
 
-        }
+    }
 
-        return false;
-
-    }*/
 
         public static boolean isWin(char inboxChar) {
      if ( isDiagonal1(inboxChar)){
@@ -162,23 +166,13 @@ public class Main {
         if (isHorisontal(inboxChar)){
     return true;
         } else
-       /* if (isHorisontal(inboxChar)){
+       if (isVertical(inboxChar)){
             return true;}
-*/
+
 
         return false;
     }
 
-/*          if (GameField[0][0] == inboxChar && GameField[0][1] == inboxChar && GameField[0][2] == inboxChar) return true;
-            if (GameField[1][0] == inboxChar && GameField[1][1] == inboxChar && GameField[1][2] == inboxChar) return true;
-            if (GameField[2][0] == inboxChar && GameField[2][1] == inboxChar && GameField[2][2] == inboxChar) return true;
-
-            if (GameField[0][0] == inboxChar && GameField[1][0] == inboxChar && GameField[2][0] == inboxChar) return true;
-            if (GameField[0][1] == inboxChar && GameField[1][1] == inboxChar && GameField[2][1] == inboxChar) return true;
-            if (GameField[0][2] == inboxChar && GameField[1][2] == inboxChar && GameField[2][2] == inboxChar) return true;
-
-            if (GameField[0][0] == inboxChar && GameField[1][1] == inboxChar && GameField[2][2] == inboxChar) return true;
-            if (GameField[0][2] == inboxChar && GameField[1][1] == inboxChar && GameField[2][0] == inboxChar) return true;*/
 
 
 
